@@ -7,8 +7,7 @@ const closeBtn = document.getElementById("closeBtn");
 
 // Menu Button Toggle
 menuBtn.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  menuBtnIcon.className = isOpen ? "ri-close-line" : "ri-menu-line";
+  navLinks.classList.toggle("open");
 });
 
 // Close Menu on Link Click

@@ -890,13 +890,16 @@ nav {
 }
 
 .footer {
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
   background-color: var(--primary-color);
-  padding: 20px;
 }
 
 .footer__container {
   display: grid;
-  gap: 4rem 2rem;
+  gap: 1.5rem;
+  padding-bottom: 0.75rem; /* Reduced padding above the underline */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Underline */
 }
 
 .footer__logo {
@@ -912,7 +915,7 @@ nav {
 
 .footer__socials {
   list-style: none;
-  margin-top: 2rem;
+  margin-top: 0.75rem; /* Reduced from 1rem or more */
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -937,8 +940,8 @@ nav {
 }
 
 .footer__col h4 {
-  margin-bottom: 1.5rem; /* Adjusted for a more compact look */
-  font-size: 1.5rem; /* Increased font size for better visibility */
+  font-size: 1.1rem; /* Slightly reduced if needed */
+  margin-bottom: 0.75rem; /* Reduced from 1rem or more */
   font-weight: 800;
   font-family: var(--header-font);
   color: var(--white);
@@ -950,7 +953,7 @@ nav {
 }
 
 .footer__links li {
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem; /* Reduced from 1rem */
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -959,6 +962,7 @@ nav {
 .footer__links a {
   color: var(--text-light);
   transition: 0.3s;
+  font-size: 0.9rem; /* Slightly reduced */
 }
 
 .footer__links a:hover {
@@ -983,7 +987,8 @@ nav {
 }
 
 .footer__bar {
-  padding: 1rem;
+  margin-top: 0.5rem; /* Reduced space between underline and copyright */
+  padding-top: 0.5rem; /* Reduced padding */
   font-size: 0.9rem;
   font-weight: bold;
   color: var(--text-light);
@@ -1016,11 +1021,13 @@ nav {
 
 @media (max-width: 767px) {
   .footer__col {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem; /* Reduced from 2rem */
   }
 
   .footer__container {
     grid-template-columns: 1fr; /* Stack items vertically */
+    gap: 1rem; /* Further reduce gap on mobile */
+    padding-bottom: 0.75rem; /* Consistent with desktop */
   }
 
   .footer__col h4 {
@@ -1029,6 +1036,15 @@ nav {
 
   .footer__links h5 {
     font-size: 0.9rem; /* Adjusted for better mobile viewing */
+    margin-bottom: 0.3rem; /* Added to reduce vertical space */
+  }
+
+  .footer__links p {
+    font-size: 0.8rem; /* Reduced font size for contact details */
+  }
+
+  .footer__bar {
+    margin-top: 0.5rem; /* Consistent with desktop */
   }
 }
 
@@ -1050,6 +1066,7 @@ nav {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  
   .footer__container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1071,7 +1088,7 @@ nav {
 
 @media (max-width: 767px) {
   .footer__col {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem; /* Reduced from 2rem */
   }
 
   .footer__container {
@@ -1189,29 +1206,41 @@ nav {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
-
 }
 
-/* Media query for mobile devices */
 @media (max-width: 767px) {
   .nav__menu__btn {
     display: block; /* Show on mobile */
   }
 
   .nav__links {
-    display: none; /* Hide nav links by default on mobile */
-  }
-
-  .nav__links.open {
-    display: flex;
-    flex-direction: column;
     position: absolute;
-    top: 100%;
+    top: 100%; /* Position it just below the header */
     left: 0;
     width: 100%;
     background-color: var(--white);
+    flex-direction: column;
+    align-items: center;
     padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav__links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav__links li {
+    margin: 0.5rem 0;
+  }
+
+  .nav__bar {
+    position: relative; /* Ensure the nav bar is a positioning context for absolute elements */
   }
 }
 
@@ -1221,8 +1250,11 @@ nav {
   }
 
   .nav__links {
-    display: flex; /* Always show nav links on desktop */
+    position: static;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    background-color: transparent;
+    box-shadow: none;
   }
-
- 
 }

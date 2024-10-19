@@ -5,15 +5,36 @@ const contactBar = document.getElementById("contactBar");
 const contactForm = document.getElementById("contactForm");
 const closeBtn = document.getElementById("closeBtn");
 
-// Menu Button Toggle
-menuBtn.addEventListener("click", () => {
+function toggleMenu() {
   navLinks.classList.toggle("open");
+  document.body.style.overflow = navLinks.classList.contains("open") ? "hidden" : "";
+  menuBtnIcon.className = navLinks.classList.contains("open") ? "ri-close-line" : "ri-menu-line";
+}
+
+menuBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  toggleMenu();
 });
 
-// Close Menu on Link Click
-navLinks.addEventListener("click", () => {
-  navLinks.classList.remove("open");
-  menuBtnIcon.className = "ri-menu-line";
+// Close menu when clicking a link
+navLinks.addEventListener("click", (event) => {
+  if (event.target.tagName === "A") {
+    toggleMenu();
+  }
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", (event) => {
+  if (navLinks.classList.contains("open") && !navLinks.contains(event.target) && !menuBtn.contains(event.target)) {
+    toggleMenu();
+  }
+});
+
+// Close menu when resizing to desktop view
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 768 && navLinks.classList.contains("open")) {
+    toggleMenu();
+  }
 });
 
 // Contact Button Toggle

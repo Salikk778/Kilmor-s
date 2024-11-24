@@ -7,7 +7,11 @@ const closeBtn = document.getElementById("closeBtn");
 
 function toggleMenu() {
   navLinks.classList.toggle("open");
-  document.body.style.overflow = navLinks.classList.contains("open") ? "hidden" : "";
+  if (navLinks.classList.contains("open")) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
   menuBtnIcon.className = navLinks.classList.contains("open") ? "ri-close-line" : "ri-menu-line";
 }
 
@@ -19,21 +23,27 @@ menuBtn.addEventListener("click", (event) => {
 // Close menu when clicking a link
 navLinks.addEventListener("click", (event) => {
   if (event.target.tagName === "A") {
-    toggleMenu();
+    document.body.style.overflow = "";
+    navLinks.classList.remove("open");
+    menuBtnIcon.className = "ri-menu-line";
   }
 });
 
 // Close menu when clicking outside
 document.addEventListener("click", (event) => {
   if (navLinks.classList.contains("open") && !navLinks.contains(event.target) && !menuBtn.contains(event.target)) {
-    toggleMenu();
+    document.body.style.overflow = "";
+    navLinks.classList.remove("open");
+    menuBtnIcon.className = "ri-menu-line";
   }
 });
 
 // Close menu when resizing to desktop view
 window.addEventListener("resize", () => {
-  if (window.innerWidth >= 768 && navLinks.classList.contains("open")) {
-    toggleMenu();
+  if (window.innerWidth >= 768) {
+    document.body.style.overflow = "";
+    navLinks.classList.remove("open");
+    menuBtnIcon.className = "ri-menu-line";
   }
 });
 
